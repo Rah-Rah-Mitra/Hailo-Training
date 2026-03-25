@@ -25,14 +25,14 @@ dist/
 # Logs
 *.log
 
-# Model and optimization artifacts
-*.pt
-*.onnx
-*.har
-*.hef
-*.npz
-*.npy
-*.engine
+# Model and optimization artifacts (only under models/)
+models/*.pt
+models/*.onnx
+models/*.har
+models/*.hef
+models/*.npz
+models/*.npy
+models/*.engine
 
 # Training/inference outputs
 runs/
