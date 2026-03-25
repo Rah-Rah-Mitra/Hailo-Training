@@ -1,0 +1,16 @@
+names:
+- Caption
+- Footnote
+- Formula
+- List-item
+- Page-footer
+- Page-header
+- Picture
+- Section-header
+- Table
+- Text
+- Title
+nc: 11
+path: /home/appuser/workspace/datasets/doclaynet
+train: images/train
+val: images/validation

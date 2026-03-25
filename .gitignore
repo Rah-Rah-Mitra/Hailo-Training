@@ -1,0 +1,51 @@
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments and local Python tooling
+.venv/
+venv/
+env/
+.python-version
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build/package artifacts
+build/
+dist/
+*.egg-info/
+
+# Test and lint caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Logs
+*.log
+
+# Model and optimization artifacts
+*.pt
+*.onnx
+*.har
+*.hef
+*.npz
+*.npy
+*.engine
+
+# Training/inference outputs
+runs/
+results/
+outputs/
+
+# Dataset files (keep config only)
+datasets/**
+!datasets/
+!datasets/doclaynet/
+!datasets/doclaynet/dataset.yaml
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
