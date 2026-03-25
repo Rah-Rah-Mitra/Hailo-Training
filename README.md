@@ -105,3 +105,8 @@ INT8 Post-Training Quantization (PTQ) on the Hailo Dataflow Compiler is highly s
 If your Hailo calibration dataset (in your `main.py` script) is pre-processed even slightly differently than how the community model was trained, the quantization process will generate compounding mathematical errors, resulting in terrible bounding box predictions on the Pi.
 
 Training it yourself guarantees a 1:1 match between your training data distribution and your Hailo calibration distribution.
+
+## Acknowledgements
+
+- Ultralytics YOLO26 on Hugging Face: https://huggingface.co/Ultralytics/YOLO26/tree/main
+- DocLayNet-v1.2 dataset on Hugging Face: https://huggingface.co/datasets/docling-project/DocLayNet-v1.2
