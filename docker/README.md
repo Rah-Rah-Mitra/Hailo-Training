@@ -1,6 +1,6 @@
 # Hailo DFC Development Container for YOLO26
 
-Docker-based development environment for finetuning YOLO26 models and compiling them to `.hef` files using the Hailo Dataflow Compiler (DFC) for Hailo-8 deployment.
+Docker-based development environment for finetuning YOLO26 models and compiling them to `.hef` files using the Hailo Dataflow Compiler (DFC) for Hailo-8 deployment. Docker is initialized from a `windows environment`.
 
 ## Prerequisites
 
