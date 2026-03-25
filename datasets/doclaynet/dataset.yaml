@@ -11,6 +11,6 @@ names:
 - Text
 - Title
 nc: 11
-path: /home/appuser/workspace/datasets/doclaynet
+path: /home/appuser/Hailo-Training/datasets/doclaynet
 train: images/train
 val: images/validation
