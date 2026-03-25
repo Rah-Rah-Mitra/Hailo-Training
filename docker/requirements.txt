@@ -1,0 +1,8 @@
+onnx==1.16.0
+onnxsim==0.4.36
+opencv-python==4.11.0.86
+pillow==11.1.0
+ultralytics>=8.4.20
+numpy==1.26.4
+seaborn
+datasets
