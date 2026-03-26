@@ -106,6 +106,21 @@ If your Hailo calibration dataset (in your `main.py` script) is pre-processed ev
 
 Training it yourself guarantees a 1:1 match between your training data distribution and your Hailo calibration distribution.
 
+## Hailo SDK Download Reference
+
+These are the exact SDK download item types needed for this project:
+
+- Hailo Dataflow Compiler - Python package (`.whl`)
+- HailoRT - Ubuntu package (`.deb`) for your target architecture (`amd64` or `arm64`)
+
+### Hailo Dataflow Compiler (Python wheel)
+
+![Hailo Dataflow Compiler wheel download item](docker/images/hailo-dfc-wheel-download.png)
+
+### HailoRT (Ubuntu deb package)
+
+![HailoRT deb download item](docker/images/hailort-deb-download.png)
+
 ## Acknowledgements
 
 - Ultralytics YOLO26 on Hugging Face: https://huggingface.co/Ultralytics/YOLO26/tree/main

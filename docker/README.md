@@ -93,6 +93,14 @@ To get this working, you need to:
    - File name: `hailort_4.XX.X_amd64.deb` or `hailort_4.XX.X_arm64.deb` (depending on your architecture)
    - Place it in your project directory at the same level as the Dockerfile
 
+#### Visual Reference (SDK Download Items)
+
+Use these screenshots to match the correct download entries in Hailo Developer Zone:
+
+![Hailo Dataflow Compiler wheel download item](images/hailo-dfc-wheel-download.png)
+
+![HailoRT deb download item](images/hailort-deb-download.png)
+
 ### Step 2: Verify Files Are in Place
 
 Your project directory should now look like:
