@@ -6,6 +6,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Force TensorFlow to use CPU only (avoids cuDNN errors from the Hailo DFC)
+# PyTorch will still use GPU via its own bundled CUDA libraries
+ENV CUDA_VISIBLE_DEVICES=-1
+ENV TF_CPP_MIN_LOG_LEVEL=2
+
 # Install system dependencies
 RUN apt-get update && \
     apt-get install -y \
@@ -27,7 +32,6 @@ RUN apt-get update && \
       pkg-config \
       lsb-release \
       bsdmainutils \
-      # Gstreamer is probably not needed. Consider removing it.
       libgstreamer1.0-0 \
       libgstreamer-plugins-base1.0-0 && \
     rm -rf /var/lib/apt/lists/*
@@ -45,16 +49,27 @@ RUN python3.10 -m venv /venv && \
 
 # Set environment variables so that the venv is used
 ENV VIRTUAL_ENV=/venv
-ENV PATH="/venv/bin:$PATH"
+ENV PATH="/venv/bin:/opt/hailo/usr/bin:$PATH"
 
 # Copy the Hailo Dataflow Compiler wheel into the image and install it in the venv
 COPY hailo_dataflow_compiler-3.33.1-py3-none-linux_x86_64.whl /tmp/
 RUN pip install /tmp/hailo_dataflow_compiler-3.33.1-py3-none-linux_x86_64.whl
 
+# Install the pre-built HailoRT deb package (runtime only)
+# dpkg won't work here because post-install scripts cannot run during Docker build
+COPY hailort_4.23.0_arm64.deb /tmp/
+RUN mkdir -p /opt/hailo && dpkg-deb -x /tmp/hailort_4.23.0_arm64.deb /opt/hailo
+
+# Create symlinks for hailortcli and the library
+RUN ln -s /opt/hailo/usr/bin/hailortcli /usr/bin/hailortcli || true && \
+    ln -s /opt/hailo/usr/lib/libhailort.so* /usr/lib/ || true
+
+# Set environment variables so the Hailo SDK can find its shared libraries and binaries
+ENV LD_LIBRARY_PATH=/opt/hailo/usr/lib
+
 # Switch to root temporarily to set up permissions for the SDK client directory
 USER root
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-# Not sure if this next line is still needed. Maybe can be removed.
 RUN mkdir -p /usr/local/lib/python3.10/sdk_client && chmod -R 777 /usr/local/lib/python3.10/sdk_client
 RUN chown -R appuser /venv
 
@@ -68,8 +83,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 USER appuser
 
-
-# Not sure if this is still needed. 
 RUN ln -sf /venv/bin/python3 /venv/bin/python
 
 # Default to an interactive shell; the venv is already activated via PATH.
